@@ -1,0 +1,78 @@
+[
+    {
+        "@base": "terminusdb:///documentation/data/",
+        "@schema": "terminusdb:///documentation/schema#",
+        "@type": "@context"
+    },
+    {   "@id" : "Named",
+        "@type" : "Class",
+        "@abstract" : [],
+        "name" : "xsd:string"
+    },
+    {   "@id" : "Summarized",
+        "@type" : "Class",
+        "@abstract" : [],
+        "summary" : { "@type" : "Optional", "@class" : "xsd:string"}
+    },
+    {   "@id" : "Documented",
+        "@type" : "Class",
+        "@inherits" : ["Named", "Summarized"],
+        "@abstract" : []
+    },
+    {   "@id" : "Parameter",
+        "@type" : "Class",
+        "@inherits" : "Documented",
+        "type" : "xsd:string",
+        "default" : "xsd:string"
+    },
+    {   "@id" : "Returns",
+        "@type" : "Class",
+        "name" : { "@type" : "Optional", "@class" : "xsd:string" },
+        "type" : "xsd:string"
+    },
+    {   "@id" : "Exception",
+        "@type" : "Class",
+        "@inherits" : "Documented",
+        "paramters" : { "@type" : "Array",
+                        "@class" : "xsd:string"}
+    },
+    {   "@id" : "Module",
+        "@type" : "Class",
+        "@inherits" : "Documented",
+        "definitions" : { "@type" : "Set", "@class" : "Definition" },
+        "classes" : { "@type" : "Set", "@class" : "Class" }
+    },
+    {   "@id" : "Class",
+        "@type" : "Class",
+        "@inherits" : "Documented",
+        "name" : "xsd:string",
+        "memberVariable" : "Parameter",
+        "memberFunction" : "Definition"
+    },
+    {
+        "@id": "Definition",
+        "@type": "Class",
+        "@inherits" : "Documented",
+        "section" : { "@type" : "Optional", "@class" : "xsd:string" },
+        "index" :  { "@type" : "Optional", "@class" : "xsd:integer" },
+        "signature" : "xsd:string",
+        "extendedSummary" : "xsd:string",
+        "@oneOf" : [{ "parameters" : { "@type" : "Array",
+                                       "@class" : "Parameter" },
+                      "receives" : { "@type" : "Array",
+                                     "@class" : "Parameter" }},
+                    { "void" : "sys:Unit",
+                      "yields" : "Returns",
+                      "returns" : "Returns",
+                      "returns_multiple" : { "@type" : "Array",
+                                             "@class" : "Returns" }}],
+        "raises" : { "@type" : "Set",
+                     "@class" : "Exception" },
+        "seeAlso" : { "@type" : "Set",
+                      "@class" : "Definition" },
+        "notes" : "xsd:string",
+        "references" : "xsd:string",
+        "examples" : { "@type" : "Array",
+                       "@class" : "xsd:string" }
+    }
+]
