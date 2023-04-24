@@ -72,12 +72,12 @@
             "@class": "xsd:integer",
             "@type": "Optional"
         },
-        "notes": "xsd:string",
+        "notes": { "@type": "Optional", "@class": "xsd:string"},
         "raises": {
             "@class": "Exception",
             "@type": "Set"
         },
-        "references": "xsd:string",
+        "references": {"@type": "Optional", "@class": "xsd:string"},
         "section": {
             "@class": "xsd:string",
             "@type": "Optional"
@@ -86,7 +86,7 @@
             "@class": "Definition",
             "@type": "Set"
         },
-        "signature": "xsd:string"
+        "signature": {"@type": "Optional", "@class": "xsd:string"}
     },
     {
         "@id": "Class",
