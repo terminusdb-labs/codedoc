@@ -4,75 +4,149 @@
         "@schema": "terminusdb:///documentation/schema#",
         "@type": "@context"
     },
-    {   "@id" : "Named",
-        "@type" : "Class",
-        "@abstract" : [],
-        "name" : "xsd:string"
+    {
+        "@id": "Module",
+        "@inherits": "Documented",
+        "@type": "Class",
+        "classes": {
+            "@class": "Class",
+            "@type": "Set"
+        },
+        "definitions": {
+            "@class": "Definition",
+            "@type": "Set"
+        }
     },
-    {   "@id" : "Summarized",
-        "@type" : "Class",
-        "@abstract" : [],
-        "summary" : { "@type" : "Optional", "@class" : "xsd:string"}
+    {
+        "@id": "Language",
+        "@type": "Enum",
+        "@value": [
+            "Python",
+            "Javascript"
+        ]
     },
-    {   "@id" : "Documented",
-        "@type" : "Class",
-        "@inherits" : ["Named", "Summarized"],
-        "@abstract" : []
-    },
-    {   "@id" : "Parameter",
-        "@type" : "Class",
-        "@inherits" : "Documented",
-        "type" : "xsd:string",
-        "default" : "xsd:string"
-    },
-    {   "@id" : "Returns",
-        "@type" : "Class",
-        "name" : { "@type" : "Optional", "@class" : "xsd:string" },
-        "type" : "xsd:string"
-    },
-    {   "@id" : "Exception",
-        "@type" : "Class",
-        "@inherits" : "Documented",
-        "paramters" : { "@type" : "Array",
-                        "@class" : "xsd:string"}
-    },
-    {   "@id" : "Module",
-        "@type" : "Class",
-        "@inherits" : "Documented",
-        "definitions" : { "@type" : "Set", "@class" : "Definition" },
-        "classes" : { "@type" : "Set", "@class" : "Class" }
-    },
-    {   "@id" : "Class",
-        "@type" : "Class",
-        "@inherits" : "Documented",
-        "name" : "xsd:string",
-        "memberVariable" : "Parameter",
-        "memberFunction" : "Definition"
+    {
+        "@abstract": [],
+        "@id": "Summarized",
+        "@type": "Class",
+        "summary": {
+            "@class": "xsd:string",
+            "@type": "Optional"
+        }
     },
     {
         "@id": "Definition",
+        "@inherits": "Documented",
+        "@oneOf": [
+            {
+                "parameters": {
+                    "@class": "Parameter",
+                    "@dimensions": 1,
+                    "@type": "Array"
+                },
+                "receives": {
+                    "@class": "Parameter",
+                    "@dimensions": 1,
+                    "@type": "Array"
+                }
+            },
+            {
+                "returns": "Returns",
+                "returns_multiple": {
+                    "@class": "Returns",
+                    "@dimensions": 1,
+                    "@type": "Array"
+                },
+                "void": "sys:Unit",
+                "yields": "Returns"
+            }
+        ],
         "@type": "Class",
-        "@inherits" : "Documented",
-        "section" : { "@type" : "Optional", "@class" : "xsd:string" },
-        "index" :  { "@type" : "Optional", "@class" : "xsd:integer" },
-        "signature" : "xsd:string",
-        "extendedSummary" : "xsd:string",
-        "@oneOf" : [{ "parameters" : { "@type" : "Array",
-                                       "@class" : "Parameter" },
-                      "receives" : { "@type" : "Array",
-                                     "@class" : "Parameter" }},
-                    { "void" : "sys:Unit",
-                      "yields" : "Returns",
-                      "returns" : "Returns",
-                      "returns_multiple" : { "@type" : "Array",
-                                             "@class" : "Returns" }}],
-        "raises" : { "@type" : "Set",
-                     "@class" : "Exception" },
-        "seeAlso" : { "@type" : "Set",
-                      "@class" : "Definition" },
-        "notes" : "xsd:string",
-        "references" : "xsd:string",
-        "examples" : { "@type" : "Array",
-                       "@class" : "xsd:string" }
+        "examples": {
+            "@class": "xsd:string",
+            "@dimensions": 1,
+            "@type": "Array"
+        },
+        "extendedSummary": "xsd:string",
+        "index": {
+            "@class": "xsd:integer",
+            "@type": "Optional"
+        },
+        "notes": "xsd:string",
+        "raises": {
+            "@class": "Exception",
+            "@type": "Set"
+        },
+        "references": "xsd:string",
+        "section": {
+            "@class": "xsd:string",
+            "@type": "Optional"
+        },
+        "seeAlso": {
+            "@class": "Definition",
+            "@type": "Set"
+        },
+        "signature": "xsd:string"
+    },
+    {
+        "@id": "Class",
+        "@inherits": "Documented",
+        "@type": "Class",
+        "memberFunction": "Definition",
+        "memberVariable": "Parameter",
+        "name": "xsd:string"
+    },
+    {
+        "@id": "Returns",
+        "@type": "Class",
+        "name": {
+            "@class": "xsd:string",
+            "@type": "Optional"
+        },
+        "type": "xsd:string"
+    },
+    {
+        "@abstract": [],
+        "@id": "Documented",
+        "@inherits": [
+            "Named",
+            "Summarized"
+        ],
+        "@type": "Class"
+    },
+    {
+        "@id": "Application",
+        "@inherits": "Documented",
+        "@type": "Class",
+        "language": "Language",
+        "license": "xsd:string",
+        "modules": {
+            "@class": "Module",
+            "@type": "Set"
+        },
+        "version": "xsd:string"
+    },
+    {
+        "@id": "Exception",
+        "@inherits": "Documented",
+        "@type": "Class",
+        "paramters": {
+            "@class": "xsd:string",
+            "@dimensions": 1,
+            "@type": "Array"
+        }
+    },
+    {
+        "@abstract": [],
+        "@id": "Named",
+        "@type": "Class",
+        "name": "xsd:string"
+    },
+    {
+        "@id": "Parameter",
+        "@inherits": "Documented",
+        "@type": "Class",
+        "default": "xsd:string",
+        "type": "xsd:string"
     }
 ]
