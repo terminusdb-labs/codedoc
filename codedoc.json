@@ -67,7 +67,7 @@
             "@dimensions": 1,
             "@type": "Array"
         },
-        "extendedSummary": "xsd:string",
+        "extendedSummary": {"@type": "Optional", "@class": "xsd:string"},
         "index": {
             "@class": "xsd:integer",
             "@type": "Optional"
@@ -146,7 +146,7 @@
         "@id": "Parameter",
         "@inherits": "Documented",
         "@type": "Class",
-        "default": "xsd:string",
+        "default": {"@class": "xsd:string", "@type": "Optional"},
         "type": "xsd:string"
     }
 ]
