@@ -92,8 +92,8 @@
         "@id": "Class",
         "@inherits": "Documented",
         "@type": "Class",
-        "memberFunction": "Definition",
-        "memberVariable": "Parameter",
+        "memberVariables" : {"@type": "Set", "@class": "Parameter"},
+        "memberFunctions" : {"@type": "Set", "@class": "Definition"},
         "name": "xsd:string"
     },
     {
